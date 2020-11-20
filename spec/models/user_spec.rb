@@ -29,6 +29,11 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
+      it 'emailに@が含まれていない場合は登録できない' do
+        @user.email = 'userexample.com'
+        expect(@user).to_not be_valid
+        expect(@user.errors.full_messages).to include('Email is invalid')
+      end
       it '重複したemailが存在する場合登録できない' do
         @user.save
         another_user = FactoryBot.build(:user)
@@ -114,22 +119,6 @@ describe User do
         @user.birthday = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Birthday can't be blank")
-      end
-    end
-
-    describe 'emailのフォーマット' do
-      context 'Correct format' do
-        it 'is OK' do
-          @user.email = 'user@example.com'
-          expect(@user).to be_valid
-        end
-      end
-      context 'Incorrect format' do
-        it 'is NG' do
-          @user.email = 'userexample.com'
-          expect(@user).to_not be_valid
-          expect(@user.errors.full_messages).to include('Email is invalid')
-        end
       end
     end
   end
