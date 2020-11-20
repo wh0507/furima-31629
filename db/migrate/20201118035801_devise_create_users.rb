@@ -4,14 +4,14 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
   def change
     create_table :users do |t|
       ## Database authenticatable
-      t.string :nickname, null: false                             #ニックネーム必須
-      t.string :email, null: false, default: ""                   #メールアドレスは一意である、PC・ケータイどちらも可
-      t.string :encrypted_password, null: false, default: ""                 #パスワードが必須、6文字以上、半角英数字、パスワードは確認用を含めて2回入力する
-      t.string :first_name, null: false                             #ユーザー本名が、名字と名前でそれぞれ必須
-      t.string :first_name_kana, null: false                        #ユーザー本名は全角で入力させる
-      t.string :last_name, null: false                              #ユーザー本名のフリガナが、名字と名前でそれぞれ必須
-      t.string :last_name_kana, null: false                         #ユーザー本名のフリガナは全角で入力させる
-      t.date :birthday, null: false                                 #生年月日が必須
+      t.string :nickname, null: false
+      t.string :email, null: false, default: "" 
+      t.string :encrypted_password, null: false, default: ""
+      t.string :first_name, null: false
+      t.string :first_name_kana, null: false
+      t.string :last_name, null: false
+      t.string :last_name_kana, null: false
+      t.date :birthday, null: false
 
       ## Recoverable
       t.string   :reset_password_token
