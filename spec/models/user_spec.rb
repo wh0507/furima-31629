@@ -116,7 +116,7 @@ describe User do
         expect(@user.errors.full_messages).to include('First name kana Full-width katakana characters')
       end
       it 'birthdayが空だと登録できない' do
-        @user.birthday = ''
+        @user.birthday = 'aaa'
         @user.valid?
         expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
