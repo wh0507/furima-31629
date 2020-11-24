@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, except: [:index, :edit]
+  before_action :set_item, except: [:index]
   before_action :authenticate_user!, except: [:index, :show]
   #before_action :sold_out_item, only: [:show]
   
@@ -21,11 +21,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-    set_item
   end
-
+    
   def edit
-    set_item
+    if @item.user_id != current_user.id
+      redirect_to action: :index
+    end
   end
 
   def update
