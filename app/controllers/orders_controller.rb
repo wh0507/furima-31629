@@ -13,12 +13,7 @@ class OrdersController < ApplicationController
   def create
     @order = OrderDonation.new(order_params)
     if @order.valid?
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      Payjp::Charge.create(
-        amount: @item[:item_price],    # 商品の値段
-        card: order_params[:token],   # カードトークン
-        currency: 'jpy'               # 通過の種類（日本円）
-      )
+      pay_item
       @order.save
       redirect_to root_path
     else 
@@ -29,11 +24,20 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order_donation).permit(:post_code, :prefecture_id, :city, :address, :building, :phone_number, :item_id).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:order_donation).permit(:post_code, :prefecture_id, :city, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def set_item
     @item = Item.find(params[:item_id])
   end
+
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp::Charge.create(
+        amount: @item[:item_price],
+        card: order_params[:token],
+        currency: 'jpy'
+      )
+   end
 
 end

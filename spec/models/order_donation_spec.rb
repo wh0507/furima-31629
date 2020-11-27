@@ -8,7 +8,7 @@ RSpec.describe OrderDonation, type: :model, js: true do
     end
 
     describe "保存できる" do
-      it "tokenがあれば保存ができること" do
+      it "全ての情報が正しく入力されていれば保存できること" do
         expect(@order).to be_valid
       end
       it 'buildingは空でも保存できること' do
@@ -48,11 +48,6 @@ RSpec.describe OrderDonation, type: :model, js: true do
         @order.valid?
         expect(@order.errors.full_messages).to include("City can't be blank")
       end
-      it 'cityが数字のみであれば保存できないこと' do
-        @order.city = '123'
-        @order.valid?
-        expect(@order.errors.full_messages).to include("City is invalid. Input full-width characters.")
-      end
       it 'addressが空だと保存できないこと' do
         @order.address = nil
         @order.valid?
@@ -67,6 +62,21 @@ RSpec.describe OrderDonation, type: :model, js: true do
         @order.phone_number = '123-4567'
         @order.valid?
         expect(@order.errors.full_messages).to include("Phone number is invalid.")
+      end
+      it 'phone_numberが11桁以内でないと登録できないこと' do
+        @order.phone_number = '1000000000000'
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Phone number is invalid.")
+      end
+      it 'user_idが空だと保存できないこと' do
+        @order.user_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空だと保存できないこと' do
+        @order.item_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
