@@ -29,6 +29,12 @@
   text-align: center;
 }
 
+.img-size {
+  width: 300px;
+  height: 300px;
+  padding: 20px 20px;
+}
+
 /* 共通 */
 .indispensable {
   background: #ea352d;

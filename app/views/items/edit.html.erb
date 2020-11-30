@@ -18,6 +18,7 @@ app/assets/stylesheets/items/new.css %>
       <div class="weight-bold-text">
         出品画像
         <span class="indispensable">必須</span>
+        <div id="image-list"></div>
       </div>
       <div class="click-upload">
         <p>
@@ -141,7 +142,7 @@ app/assets/stylesheets/items/new.css %>
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
       <%= f.submit "変更する" ,class:"sell-btn" %>
-      <%=link_to 'もどる', "#", class:"back-btn" %>
+      <%=link_to 'もどる', item_path, method: :get, class:"back-btn" %>
     </div>
     <%# /下部ボタン %>
   </div>
