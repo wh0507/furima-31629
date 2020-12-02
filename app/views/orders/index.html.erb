@@ -7,7 +7,7 @@
     </h1>
     <%# 購入内容の表示 %>
     <div class='buy-item-info'>
-      <%= image_tag @item.image, class: 'buy-item-img' %>
+      <%= image_tag @item.images[0], class: 'buy-item-img' %>
       <div class='buy-item-right-content'>
         <h2 class='buy-item-text'>
           <%= @item.item_name %>
@@ -16,6 +16,13 @@
           <p class='item-price-text'>¥<%= @item.item_price %></p>
           <p class='item-price-sub-text'><%= @item.postage_payer.name %></p>
         </div>
+      </div>
+    </div>
+    <div class='buy-img'>
+      <div id="image-list">
+          <% @item.images.each do |image| %>
+            <%= image_tag image, class:"buy-item-box-img" %>
+          <% end %>
       </div>
     </div>
     <%# /購入内容の表示 %>

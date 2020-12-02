@@ -8,13 +8,13 @@ class Item < ApplicationRecord
   belongs_to_active_hash :postage_payer
   belongs_to_active_hash :postage_area
   belongs_to_active_hash :postage_day
-  has_one_attached :image
+  has_many_attached :images
 
   with_options presence: true do
     validates :item_name
     validates :description
     validates :item_price, format: { with: /\A[0-9]\d+\z/ }, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
-    validates :image
+    validates :images
   end
 
   with_options presence: true, numericality: { other_than: 1 } do

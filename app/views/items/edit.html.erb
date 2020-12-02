@@ -19,6 +19,10 @@ app/assets/stylesheets/items/new.css %>
         出品画像
         <span class="indispensable">必須</span>
         <div id="image-list"></div>
+        <%= image_tag @item.images[0] , class:"item-box-img" %>
+          <% @item.images.each do |image| %>
+            <%= image_tag image , class:"sub-item-box-img" %>
+          <% end %>
       </div>
       <div class="click-upload">
         <p>

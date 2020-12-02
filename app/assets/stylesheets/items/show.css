@@ -32,6 +32,11 @@
   background-color: rgb(205, 202, 202);
   object-fit: contain;
 }
+.sub-item-box-img {
+  width: 100px;
+  height: 100px;
+  display: inline;
+}
 
 .item-price-box {
   margin: 25px 0px;
